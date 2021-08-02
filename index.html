@@ -1,0 +1,44 @@
+<!doctype html>
+
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>Sorting Visualizer</title>
+  <link rel="stylesheet" href="./styles.css">
+</head>
+<body>
+  <h1>Sorting Visualizer Tool</h1>
+  <div id="nav">
+    <button>Random Array</button>
+    <select name="Select Sort Algorithm" id="sort-menu">
+      <option value="" selected disabled hidden>Select a Sort</option>
+      <option>Bubble Sort</option>
+      <option>Selection Sort</option>
+      <option>Insertion Sort</option>
+      <option>Merge Sort</option>
+      <option>Quick Sort</option>
+    </select>
+    <select name="Select Array Size" id="size-menu">
+      <option value="" selected disabled hidden>Select Array Size</option>
+      <option>5</option>
+      <option>10</option>
+      <option>25</option>
+      <option>50</option>
+      <option>100</option>
+    </select>
+    <select name="Select Sort Speed" id="speed-menu">
+      <option value="" selected disabled hidden>Select Sort Speed</option>
+      <option>0.25x</option>
+      <option>0.50x</option>
+      <option>1.00x</option>
+      <option>1.5x</option>
+      <option>2x</option>
+    </select>
+    <button>Sort</button>
+  </div>
+  <div id="visual">
+    <div id="animation"></div>
+  </div>
+  <script type="module" src="index.js"></script>
+</body>
+</html>
