@@ -3,20 +3,23 @@ import { HIGHERBOUND } from "./index.js";
 
 export default class Helper {
     list: NodeListOf<HTMLElement>;
+    time: number;
 
-    constructor(list: NodeListOf<HTMLElement>) {
+    constructor(list: NodeListOf<HTMLElement>, time: number) {
         this.list = list;
+        this.time = time;
     }
-    compare = (i: number, j: number): void => {
+    compare = async (i: number, j: number): Promise<void> => {
         if (this.getValue(i) > this.getValue(j)) {
             //highlight the two being compared
             this.list[i].classList.add("comparing");
             this.list[j].classList.add("comparing");
-            this.swap(i, j);
+            await this.swap(i, j);
         }
     };
 
-    swap = (i: number, j: number): void => {
+    swap = async (i: number, j: number): Promise<void> => {
+        await this.pause();
         let temp = this.getValue(j);
         this.setValue(j, this.getValue(i));
         this.setValue(i, temp);
@@ -32,5 +35,15 @@ export default class Helper {
         this.list[index].setAttribute("value", `${value}`);
         const height = (value / HIGHERBOUND) * 100;
         this.list[index].style.height = `${height}%`;
+    };
+
+    pause = async (): Promise<void> => {
+        return new Promise((resolve) => {
+            setTimeout(() => resolve(), this.time);
+        });
+    };
+
+    markDone = (index: number): void => {
+        this.list[index].classList.add("done");
     };
 }
