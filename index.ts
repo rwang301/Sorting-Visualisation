@@ -27,4 +27,4 @@ const arr = generateArray(10);
 console.log(arr);
 drawArray(arr);
 const sort = new Sort(1000);
-console.log(sort.InsertionSort());
+console.log(sort.SelectionSort());

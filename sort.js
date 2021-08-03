@@ -29,6 +29,29 @@ export default class Sort {
                 }
                 sortedLen++;
             }
+            /* elements are not fully sorted until
+            every element has been iterated */
+            for (let k = 0; k < sortedLen; k++) {
+                this.helper.markDone(k);
+            }
+        });
+        this.SelectionSort = () => __awaiter(this, void 0, void 0, function* () {
+            /* length - 1 because if (n-1) elements have all been the "minimum value"
+            nth should be sorted by default */
+            let minIndex = 0;
+            for (let i = 0; i < this.length; i++) {
+                let min = this.helper.getValue(i);
+                // get min value
+                for (let j = i + 1; j < this.length; j++) {
+                    //find smallest element
+                    if (this.helper.getValue(j) < min) {
+                        minIndex = j;
+                        min = this.helper.getValue(j);
+                    }
+                }
+                yield this.helper.compare(i, minIndex);
+                this.helper.markDone(i);
+            }
         });
         this.lawton = () => {
             return this.list;
