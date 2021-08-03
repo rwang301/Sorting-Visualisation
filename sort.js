@@ -19,6 +19,17 @@ export default class Sort {
             }
             this.helper.markDone(0);
         });
+        this.InsertionSort = () => __awaiter(this, void 0, void 0, function* () {
+            let sortedLen = 1;
+            for (let i = 1; i < this.length; i++) {
+                if (this.helper.getValue(i) < this.helper.getValue(sortedLen - 1)) {
+                    for (let j = i; j > 0; j--) {
+                        yield this.helper.compare(j - 1, j);
+                    }
+                }
+                sortedLen++;
+            }
+        });
         this.lawton = () => {
             return this.list;
         };

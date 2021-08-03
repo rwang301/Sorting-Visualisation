@@ -21,6 +21,18 @@ export default class Sort {
         this.helper.markDone(0);
     };
 
+    InsertionSort = async (): Promise<void> => {
+        let sortedLen = 1;
+        for (let i = 1; i < this.length; i++) {
+            if (this.helper.getValue(i) < this.helper.getValue(sortedLen - 1)) {
+                for (let j = i; j > 0; j--) {
+                    await this.helper.compare(j - 1, j);
+                }
+            }
+            sortedLen++;
+        }
+    };
+
     lawton = (): NodeListOf<HTMLElement> => {
         return this.list;
     };
