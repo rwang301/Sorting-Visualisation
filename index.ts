@@ -23,8 +23,8 @@ const drawArray = (arr: number[]): void => {
     }
 };
 
-const arr = generateArray(10);
+const arr = generateArray(20);
 console.log(arr);
 drawArray(arr);
 const sort = new Sort(1000);
-console.log(sort.SelectionSort());
+console.log(sort.MergeSort(0, 19));

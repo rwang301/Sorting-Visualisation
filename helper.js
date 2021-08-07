@@ -19,6 +19,24 @@ export default class Helper {
                 yield this.swap(i, j);
             }
         });
+        this.compareArray = (lo, mid, hi) => __awaiter(this, void 0, void 0, function* () {
+            for (let i = lo; i <= hi; i++) {
+                if (i <= mid) {
+                    this.list[i].classList.add("leftArray");
+                }
+                else {
+                    this.list[i].classList.add("rightArray");
+                }
+            }
+        });
+        this.removeCompare = () => __awaiter(this, void 0, void 0, function* () {
+            const leftArray = document.querySelectorAll(".leftArray");
+            const rightArray = document.querySelectorAll(".rightArray");
+            leftArray.forEach((left) => left.classList.remove("leftArray"));
+            rightArray.forEach((right) => right.classList.remove("rightArray"));
+        });
+        // modifyValue = async (index: number, ): Promise<void> => {
+        // }
         this.swap = (i, j) => __awaiter(this, void 0, void 0, function* () {
             yield this.pause();
             let temp = this.getValue(j);

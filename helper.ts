@@ -18,6 +18,31 @@ export default class Helper {
         }
     };
 
+    compareArray = async (
+        lo: number,
+        mid: number,
+        hi: number
+    ): Promise<void> => {
+        for (let i = lo; i <= hi; i++) {
+            if (i <= mid) {
+                this.list[i].classList.add("leftArray");
+            } else {
+                this.list[i].classList.add("rightArray");
+            }
+        }
+    };
+
+    removeCompare = async (): Promise<void> => {
+        const leftArray = document.querySelectorAll(".leftArray");
+        const rightArray = document.querySelectorAll(".rightArray");
+        leftArray.forEach((left) => left.classList.remove("leftArray"));
+        rightArray.forEach((right) => right.classList.remove("rightArray"));
+    };
+
+    // modifyValue = async (index: number, ): Promise<void> => {
+
+    // }
+
     swap = async (i: number, j: number): Promise<void> => {
         await this.pause();
         let temp = this.getValue(j);

@@ -52,3 +52,11 @@ button {
 .done {
     background-color: rgb(150, 238, 120);
 }
+
+.leftArray {
+    background-color: rgb(154, 223, 244);
+}
+
+.rightArray {
+    background-color: rgb(206, 204, 143);
+}
