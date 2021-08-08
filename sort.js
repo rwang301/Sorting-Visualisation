@@ -97,6 +97,33 @@ export default class Sort {
             }
             yield this.helper.removeCompare();
         });
+        this.QuickSort = (arr) => __awaiter(this, void 0, void 0, function* () {
+            if (arr.length <= 1)
+                return;
+            let index = yield this.Partition(arr);
+            console.log(index);
+            // await this.QuickSort(arr.slice(0, index));
+            // await this.QuickSort(arr.slice(index + 1, arr.length));
+        });
+        this.Partition = (arr) => __awaiter(this, void 0, void 0, function* () {
+            //just ensures that every value left of the pivot is smaller
+            //and every value to the right is bigger (not necessarily sorted)
+            let pivot = arr[0];
+            let i = 1, j = arr.length - 1;
+            // while (i < j) {
+            //     while (arr[i] < pivot) i++;
+            //     while (arr[j] > pivot) j--;
+            //     // swaps and styles
+            //     // await this.helper.compare(i, j);
+            // }
+            // means i == j
+            // swap the pivot to it's sorted position
+            // let sortedPos = pivot > arr[i] ? i : i - 1;
+            // await this.helper.compare(0, sortedPos);
+            // return sortedPos;
+            console.log(i, j);
+            return 1;
+        });
         this.lawton = () => {
             return this.list;
         };

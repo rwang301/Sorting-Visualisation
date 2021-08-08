@@ -39,10 +39,6 @@ export default class Helper {
         rightArray.forEach((right) => right.classList.remove("rightArray"));
     };
 
-    // modifyValue = async (index: number, ): Promise<void> => {
-
-    // }
-
     swap = async (i: number, j: number): Promise<void> => {
         await this.pause();
         let temp = this.getValue(j);

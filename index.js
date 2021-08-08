@@ -23,4 +23,5 @@ const arr = generateArray(20);
 console.log(arr);
 drawArray(arr);
 const sort = new Sort(1000);
-console.log(sort.MergeSort(0, 19));
+// console.log(sort.MergeSort(0, 19));
+console.log(sort.QuickSort(arr));

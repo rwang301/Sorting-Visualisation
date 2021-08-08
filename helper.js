@@ -35,8 +35,6 @@ export default class Helper {
             leftArray.forEach((left) => left.classList.remove("leftArray"));
             rightArray.forEach((right) => right.classList.remove("rightArray"));
         });
-        // modifyValue = async (index: number, ): Promise<void> => {
-        // }
         this.swap = (i, j) => __awaiter(this, void 0, void 0, function* () {
             yield this.pause();
             let temp = this.getValue(j);
