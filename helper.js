@@ -43,7 +43,9 @@ export default class Helper {
             this.list[i].classList.remove("comparing");
             this.list[j].classList.remove("comparing");
         });
-        this.getValue = (index) => {
+        this.getValue = (index, arr) => {
+            if (arr)
+                return parseInt(arr[index].getAttribute("value") || "-1");
             return parseInt(this.list[index].getAttribute("value") || "-1");
         };
         this.setValue = (index, value) => {
@@ -56,9 +58,26 @@ export default class Helper {
                 setTimeout(() => resolve(), this.time);
             });
         });
-        this.markDone = (index) => {
+        this.markDone = (index, arr) => {
+            if (arr)
+                arr[index].classList.add("done");
             this.list[index].classList.add("done");
         };
+        this.quickSwap = (i, j, arr) => __awaiter(this, void 0, void 0, function* () {
+            let temp = arr[i].style.height;
+            let tempVal = this.getValue(i, arr);
+            arr[i].classList.add("comparing");
+            arr[j].classList.add("comparing");
+            yield this.pause();
+            arr[i].style.height = arr[j].style.height;
+            arr[i].setAttribute("value", arr[j].getAttribute("value") || "");
+            // arr[i] = arr[j];
+            arr[j].style.height = temp;
+            arr[j].setAttribute("value", `${tempVal}` || "");
+            // arr[j] = temp;
+            arr[i].classList.remove("comparing");
+            arr[j].classList.remove("comparing");
+        });
         this.list = list;
         this.time = time;
     }

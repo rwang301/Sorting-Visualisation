@@ -23,9 +23,11 @@ const drawArray = (arr: number[]): void => {
     }
 };
 
-const arr = generateArray(20);
+const arr = generateArray(100);
 console.log(arr);
 drawArray(arr);
-const sort = new Sort(1000);
-// console.log(sort.MergeSort(0, 19));
-console.log(sort.QuickSort(arr));
+const sort = new Sort(100);
+// console.log(sort.MergeSort(0, 99));
+sort.QuickSort([
+    ...(document.querySelectorAll(".bar") as NodeListOf<HTMLElement>),
+]);

@@ -48,7 +48,8 @@ export default class Helper {
         this.list[j].classList.remove("comparing");
     };
 
-    getValue = (index: number): number => {
+    getValue = (index: number, arr?: HTMLElement[]): number => {
+        if (arr) return parseInt(arr[index].getAttribute("value") || "-1");
         return parseInt(this.list[index].getAttribute("value") || "-1");
     };
 
@@ -64,7 +65,28 @@ export default class Helper {
         });
     };
 
-    markDone = (index: number): void => {
+    markDone = (index: number, arr?: HTMLElement[]): void => {
+        if (arr) arr[index].classList.add("done");
         this.list[index].classList.add("done");
+    };
+
+    quickSwap = async (
+        i: number,
+        j: number,
+        arr: HTMLElement[]
+    ): Promise<void> => {
+        let temp = arr[i].style.height;
+        let tempVal = this.getValue(i, arr);
+        arr[i].classList.add("comparing");
+        arr[j].classList.add("comparing");
+        await this.pause();
+        arr[i].style.height = arr[j].style.height;
+        arr[i].setAttribute("value", arr[j].getAttribute("value") || "");
+        // arr[i] = arr[j];
+        arr[j].style.height = temp;
+        arr[j].setAttribute("value", `${tempVal}` || "");
+        // arr[j] = temp;
+        arr[i].classList.remove("comparing");
+        arr[j].classList.remove("comparing");
     };
 }

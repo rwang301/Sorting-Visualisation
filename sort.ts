@@ -3,10 +3,12 @@ import Helper from "./helper.js";
 export default class Sort {
     length: number;
     list: NodeListOf<HTMLElement>;
+    quickList: HTMLElement[];
     helper: Helper;
 
     constructor(time: number) {
         this.list = document.querySelectorAll(".bar");
+        this.quickList = [...this.list];
         this.length = this.list.length;
         this.helper = new Helper(this.list, time);
     }
@@ -107,36 +109,38 @@ export default class Sort {
         await this.helper.removeCompare();
     };
 
-    QuickSort = async (arr: number[]): Promise<void> => {
+    QuickSort = async (arr: HTMLElement[]): Promise<void> => {
         if (arr.length <= 1) return;
         let index = await this.Partition(arr);
-        console.log(index);
-        // await this.QuickSort(arr.slice(0, index));
-        // await this.QuickSort(arr.slice(index + 1, arr.length));
+        // console.log(index);
+        await this.QuickSort(arr.slice(0, index));
+        await this.QuickSort(arr.slice(index + 1, arr.length));
     };
 
-    Partition = async (arr: number[]): Promise<number> => {
+    Partition = async (arr: HTMLElement[]): Promise<number> => {
         //just ensures that every value left of the pivot is smaller
         //and every value to the right is bigger (not necessarily sorted)
-        let pivot = arr[0];
+        let pivot = this.helper.getValue(0, arr);
         let i = 1,
             j = arr.length - 1;
-        // while (i < j) {
-        //     while (arr[i] < pivot) i++;
-        //     while (arr[j] > pivot) j--;
-        //     // swaps and styles
-        //     // await this.helper.compare(i, j);
-        // }
+        while (i < j) {
+            while (this.helper.getValue(i, arr) <= pivot && i != j) i++;
+            while (this.helper.getValue(j, arr) > pivot && i != j) j--;
+            // swaps and styles
+            if (i >= j) break;
+            await this.helper.quickSwap(i, j, arr);
+        }
         // means i == j
         // swap the pivot to it's sorted position
-        // let sortedPos = pivot > arr[i] ? i : i - 1;
-        // await this.helper.compare(0, sortedPos);
-        // return sortedPos;
-        console.log(i, j);
-        return 1;
+        let sortedPos = pivot > this.helper.getValue(i, arr) ? i : i - 1;
+        await this.helper.quickSwap(0, sortedPos, arr);
+        return sortedPos;
     };
 
     lawton = (): NodeListOf<HTMLElement> => {
         return this.list;
     };
+    // let sortedPos = pivot > this.helper.getValue(i, arr) ? i : i - 1;
+    // edge case in quick sort if first element is the largest
+    // as i will be length and cause referenceerror in array
 }
