@@ -19,7 +19,8 @@ const drawArray = (arr) => {
         animation === null || animation === void 0 ? void 0 : animation.appendChild(bar);
     }
 };
-const arr = generateArray(100);
+// const arr = generateArray(5);
+const arr = [52, 26, 80, 46, 96];
 console.log(arr);
 drawArray(arr);
 const sort = new Sort(100);

@@ -41,6 +41,7 @@ export default class Sort {
             let minIndex = 0;
             for (let i = 0; i < this.length; i++) {
                 let min = this.helper.getValue(i);
+                minIndex = i;
                 // get min value
                 for (let j = i + 1; j < this.length; j++) {
                     //find smallest element
