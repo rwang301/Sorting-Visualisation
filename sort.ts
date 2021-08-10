@@ -110,11 +110,16 @@ export default class Sort {
     };
 
     QuickSort = async (arr: HTMLElement[]): Promise<void> => {
-        if (arr.length <= 1) return;
+        if (arr.length <= 1) {
+            arr.length == 1 && this.helper.markDone(0, arr);
+            return;
+        }
         let index = await this.Partition(arr);
+        this.helper.markDone(index, arr);
         // console.log(index);
         await this.QuickSort(arr.slice(0, index));
         await this.QuickSort(arr.slice(index + 1, arr.length));
+        return;
     };
 
     Partition = async (arr: HTMLElement[]): Promise<number> => {

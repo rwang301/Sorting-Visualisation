@@ -31,7 +31,7 @@ button {
 #animation {
     height: 90%;
     width: 90%;
-    border: 1px red solid;
+    /* border: 1px red solid; */
     display: flex;
     justify-content: space-around;
     transform: rotateX(180deg);

@@ -23,7 +23,10 @@ const arr = generateArray(100);
 console.log(arr);
 drawArray(arr);
 const sort = new Sort(100);
-// console.log(sort.MergeSort(0, 99));
-sort.QuickSort([
-    ...document.querySelectorAll(".bar"),
-]);
+// sort.BubbleSort();
+// sort.InsertionSort();
+sort.SelectionSort();
+// sort.MergeSort(0, 99);
+// sort.QuickSort([
+//     ...(document.querySelectorAll(".bar") as NodeListOf<HTMLElement>),
+// ]);

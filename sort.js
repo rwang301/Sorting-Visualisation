@@ -98,12 +98,16 @@ export default class Sort {
             yield this.helper.removeCompare();
         });
         this.QuickSort = (arr) => __awaiter(this, void 0, void 0, function* () {
-            if (arr.length <= 1)
+            if (arr.length <= 1) {
+                arr.length == 1 && this.helper.markDone(0, arr);
                 return;
+            }
             let index = yield this.Partition(arr);
+            this.helper.markDone(index, arr);
             // console.log(index);
             yield this.QuickSort(arr.slice(0, index));
             yield this.QuickSort(arr.slice(index + 1, arr.length));
+            return;
         });
         this.Partition = (arr) => __awaiter(this, void 0, void 0, function* () {
             //just ensures that every value left of the pivot is smaller
