@@ -9,32 +9,50 @@
 <body>
   <h1>Sorting Visualizer Tool</h1>
   <div id="nav">
-    <button>Random Array</button>
+    <button id="randomButton">Random Array</button>
     <select name="Select Sort Algorithm" id="sort-menu">
       <option value="" selected disabled hidden>Select a Sort</option>
-      <option>Bubble Sort</option>
-      <option>Selection Sort</option>
-      <option>Insertion Sort</option>
-      <option>Merge Sort</option>
-      <option>Quick Sort</option>
+      <option value=0>Bubble Sort</option>
+      <option value=1>Selection Sort</option>
+      <option value=2>Insertion Sort</option>
+      <option value=3>Merge Sort</option>
+      <option value=4>Quick Sort</option>
     </select>
     <select name="Select Array Size" id="size-menu">
       <option value="" selected disabled hidden>Select Array Size</option>
-      <option>5</option>
-      <option>10</option>
-      <option>25</option>
-      <option>50</option>
-      <option>100</option>
+      <option value=5>5</option>
+      <option value=10>10</option>
+      <option value=25>25</option>
+      <option value=50>50</option>
+      <option value=100>100</option>
     </select>
     <select name="Select Sort Speed" id="speed-menu">
       <option value="" selected disabled hidden>Select Sort Speed</option>
-      <option>0.25x</option>
-      <option>0.50x</option>
-      <option>1.00x</option>
-      <option>1.5x</option>
-      <option>2x</option>
+      <option value=0.25>0.25x</option>
+      <option value=0.5>0.50x</option>
+      <option value=1>1.00x</option>
+      <option value=1.5>1.5x</option>
+      <option value=2>2x</option>
     </select>
-    <button>Sort</button>
+    <button id="sortButton">Sort</button>
+  </div>
+  <div id="colourKeys">
+    <span class="container">
+      <div class="colorIcon done"></div>
+      <div class="colourKey">: Element is sorted</div>
+    </span>
+    <span class="container">
+      <div class="colorIcon comparing"></div>
+        <div class="colourKey">: Element is currently being compared</div>
+    </span>
+    <span class="container">
+      <div class="colorIcon leftArray"></div>
+        <div class="colourKey">: Left Array is currently being compared</div>
+    </span>
+    <span class="container">
+      <div class="colorIcon rightArray"></div>
+        <div class="colourKey">: Right Array is currently being compared</div>
+    </span>
   </div>
   <div id="visual">
     <div id="animation"></div>
