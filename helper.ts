@@ -82,10 +82,8 @@ export default class Helper {
         await this.pause();
         arr[i].style.height = arr[j].style.height;
         arr[i].setAttribute("value", arr[j].getAttribute("value") || "");
-        // arr[i] = arr[j];
         arr[j].style.height = temp;
         arr[j].setAttribute("value", `${tempVal}` || "");
-        // arr[j] = temp;
         arr[i].classList.remove("comparing");
         arr[j].classList.remove("comparing");
     };

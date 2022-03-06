@@ -62,7 +62,6 @@ sortButton?.addEventListener("click", () => {
         case 0:
             sort.BubbleSort();
             break;
-
         case 1:
             sort.SelectionSort();
             break;

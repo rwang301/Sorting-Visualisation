@@ -3,12 +3,10 @@ import Helper from "./helper.js";
 export default class Sort {
     length: number;
     list: NodeListOf<HTMLElement>;
-    quickList: HTMLElement[];
     helper: Helper;
 
     constructor(time: number) {
         this.list = document.querySelectorAll(".bar");
-        this.quickList = [...this.list];
         this.length = this.list.length;
         this.helper = new Helper(this.list, time);
     }
@@ -117,7 +115,6 @@ export default class Sort {
         }
         let index = await this.Partition(arr);
         this.helper.markDone(index, arr);
-        // console.log(index);
         await this.QuickSort(arr.slice(0, index));
         await this.QuickSort(arr.slice(index + 1, arr.length));
         return;
@@ -138,15 +135,10 @@ export default class Sort {
         }
         // means i == j
         // swap the pivot to it's sorted position
+        // edge case in quick sort if first element is the largest
+        // as i will be length and cause referenceerror in array
         let sortedPos = pivot > this.helper.getValue(i, arr) ? i : i - 1;
         await this.helper.quickSwap(0, sortedPos, arr);
         return sortedPos;
     };
-
-    lawton = (): NodeListOf<HTMLElement> => {
-        return this.list;
-    };
-    // let sortedPos = pivot > this.helper.getValue(i, arr) ? i : i - 1;
-    // edge case in quick sort if first element is the largest
-    // as i will be length and cause referenceerror in array
 }
