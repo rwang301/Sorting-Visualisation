@@ -1,5 +1,5 @@
-import Helper from "../Helper.js";
-import Sort from "../Sort.js";
+import Helper from "../helper.js";
+import Sort from "../sort.js";
 
 export default class QuickSort extends Sort {
     constructor(listHtml: NodeListOf<HTMLElement>, helper: Helper) {
@@ -32,14 +32,28 @@ export default class QuickSort extends Sort {
             while (this.helper.getValue(j, arr) > pivot && i != j) j--;
             // swaps and styles
             if (i >= j) break;
-            await this.helper.quickSwap(i, j, arr);
+            await this.quickSwap(i, j, arr);
         }
         // means i == j
         // swap the pivot to it's sorted position
         // edge case in quick sort if first element is the largest
         // as i will be length and cause referenceerror in array
         let sortedPos = pivot > this.helper.getValue(i, arr) ? i : i - 1;
-        await this.helper.quickSwap(0, sortedPos, arr);
+        await this.quickSwap(0, sortedPos, arr);
         return sortedPos;
     };
+
+    private async quickSwap(i: number, j: number, arr: HTMLElement[]): Promise<void> {
+        let temp = arr[i].style.height;
+        let tempVal = this.helper.getValue(i, arr);
+        arr[i].classList.add("comparing");
+        arr[j].classList.add("comparing");
+        await this.helper.pause();
+        arr[i].style.height = arr[j].style.height;
+        arr[i].setAttribute("value", arr[j].getAttribute("value") || "");
+        arr[j].style.height = temp;
+        arr[j].setAttribute("value", `${tempVal}` || "");
+        arr[i].classList.remove("comparing");
+        arr[j].classList.remove("comparing"); 
+    }
 }

@@ -61,7 +61,6 @@ export default class Helper {
 
     pause = async (): Promise<void> => {
         return new Promise((resolve) => {
-            console.log(this.time, 'lol')
             setTimeout(() => resolve(), this.time);
         });
     };
@@ -69,23 +68,5 @@ export default class Helper {
     markDone = (index: number, arr?: HTMLElement[]): void => {
         if (arr) arr[index].classList.add("done");
         this.list[index].classList.add("done");
-    };
-
-    quickSwap = async (
-        i: number,
-        j: number,
-        arr: HTMLElement[]
-    ): Promise<void> => {
-        let temp = arr[i].style.height;
-        let tempVal = this.getValue(i, arr);
-        arr[i].classList.add("comparing");
-        arr[j].classList.add("comparing");
-        await this.pause();
-        arr[i].style.height = arr[j].style.height;
-        arr[i].setAttribute("value", arr[j].getAttribute("value") || "");
-        arr[j].style.height = temp;
-        arr[j].setAttribute("value", `${tempVal}` || "");
-        arr[i].classList.remove("comparing");
-        arr[j].classList.remove("comparing");
     };
 }

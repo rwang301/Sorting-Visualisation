@@ -7,7 +7,7 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
         step((generator = generator.apply(thisArg, _arguments || [])).next());
     });
 };
-import Sort from "../Sort.js";
+import Sort from "../sort.js";
 export default class QuickSort extends Sort {
     constructor(listHtml, helper) {
         super(listHtml, helper);
@@ -44,16 +44,31 @@ export default class QuickSort extends Sort {
                 // swaps and styles
                 if (i >= j)
                     break;
-                yield this.helper.quickSwap(i, j, arr);
+                yield this.quickSwap(i, j, arr);
             }
             // means i == j
             // swap the pivot to it's sorted position
             // edge case in quick sort if first element is the largest
             // as i will be length and cause referenceerror in array
             let sortedPos = pivot > this.helper.getValue(i, arr) ? i : i - 1;
-            yield this.helper.quickSwap(0, sortedPos, arr);
+            yield this.quickSwap(0, sortedPos, arr);
             return sortedPos;
         });
     }
     ;
+    quickSwap(i, j, arr) {
+        return __awaiter(this, void 0, void 0, function* () {
+            let temp = arr[i].style.height;
+            let tempVal = this.helper.getValue(i, arr);
+            arr[i].classList.add("comparing");
+            arr[j].classList.add("comparing");
+            yield this.helper.pause();
+            arr[i].style.height = arr[j].style.height;
+            arr[i].setAttribute("value", arr[j].getAttribute("value") || "");
+            arr[j].style.height = temp;
+            arr[j].setAttribute("value", `${tempVal}` || "");
+            arr[i].classList.remove("comparing");
+            arr[j].classList.remove("comparing");
+        });
+    }
 }

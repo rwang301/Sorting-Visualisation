@@ -55,7 +55,6 @@ export default class Helper {
         };
         this.pause = () => __awaiter(this, void 0, void 0, function* () {
             return new Promise((resolve) => {
-                console.log(this.time, 'lol');
                 setTimeout(() => resolve(), this.time);
             });
         });
@@ -64,19 +63,6 @@ export default class Helper {
                 arr[index].classList.add("done");
             this.list[index].classList.add("done");
         };
-        this.quickSwap = (i, j, arr) => __awaiter(this, void 0, void 0, function* () {
-            let temp = arr[i].style.height;
-            let tempVal = this.getValue(i, arr);
-            arr[i].classList.add("comparing");
-            arr[j].classList.add("comparing");
-            yield this.pause();
-            arr[i].style.height = arr[j].style.height;
-            arr[i].setAttribute("value", arr[j].getAttribute("value") || "");
-            arr[j].style.height = temp;
-            arr[j].setAttribute("value", `${tempVal}` || "");
-            arr[i].classList.remove("comparing");
-            arr[j].classList.remove("comparing");
-        });
         this.list = list;
         this.time = time;
     }
