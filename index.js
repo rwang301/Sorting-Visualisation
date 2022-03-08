@@ -1,4 +1,4 @@
-import Helper from "./helper.js";
+import Helper from "./Helper.js";
 import BubbleSort from "./sorts/BubbleSort.js";
 import InsertionSort from "./sorts/InsertionSort.js";
 import MergeSort from "./sorts/MergeSort.js";

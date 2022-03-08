@@ -1,5 +1,5 @@
-import Helper from "../helper.js";
-import Sort from "../sort.js";
+import Helper from "../Helper.js";
+import Sort from "../Sort.js";
 
 export default class SelectionSort extends Sort {
     constructor(listHtml: NodeListOf<HTMLElement>, helper: Helper) {

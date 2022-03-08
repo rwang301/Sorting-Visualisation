@@ -1,5 +1,5 @@
-import Helper from "./helper.js";
-import Sort from "./sort.js";
+import Helper from "./Helper.js";
+import Sort from "./Sort.js";
 import BubbleSort from "./sorts/BubbleSort.js";
 import InsertionSort from "./sorts/InsertionSort.js";
 import MergeSort from "./sorts/MergeSort.js";

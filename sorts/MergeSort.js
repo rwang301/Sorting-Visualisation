@@ -7,7 +7,7 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
         step((generator = generator.apply(thisArg, _arguments || [])).next());
     });
 };
-import Sort from "../sort.js";
+import Sort from "../Sort.js";
 export default class MergeSort extends Sort {
     constructor(listHtml, helper) {
         super(listHtml, helper);
