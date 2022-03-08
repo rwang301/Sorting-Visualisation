@@ -3,6 +3,7 @@ import Sort from "./sort.js";
 import BubbleSort from "./sorts/BubbleSort.js";
 import InsertionSort from "./sorts/InsertionSort.js";
 import MergeSort from "./sorts/MergeSort.js";
+import QuickSort from "./sorts/QuickSort.js";
 import SelectionSort from "./sorts/SelectionSort.js";
 
 export const LOWERBOUND = 1;
@@ -67,7 +68,6 @@ sortButton?.addEventListener("click", () => {
         alert("Please fill all options");
         return;
     }
-    console.log(speed);
     clearAnimation();
     drawArray(generateArray(arraySize));
     let sortingAlgo: Sort;
@@ -90,13 +90,10 @@ sortButton?.addEventListener("click", () => {
             sortingAlgo = new MergeSort(listHtml, helper);
             sortingAlgo.sort();
             break;
-        // case SortingAlgorithm.QuickSort:
-        //     sort.QuickSort([
-        //         ...(document.querySelectorAll(
-        //             ".bar"
-        //         ) as NodeListOf<HTMLElement>),
-        //     ]);
-        //     break;
+        case SortingAlgorithm.QuickSort:
+            sortingAlgo = new QuickSort(listHtml, helper);
+            sortingAlgo.sort();
+            break;
         default:
             break;
     }

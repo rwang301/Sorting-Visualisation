@@ -2,6 +2,7 @@ import Helper from "./helper.js";
 import BubbleSort from "./sorts/BubbleSort.js";
 import InsertionSort from "./sorts/InsertionSort.js";
 import MergeSort from "./sorts/MergeSort.js";
+import QuickSort from "./sorts/QuickSort.js";
 import SelectionSort from "./sorts/SelectionSort.js";
 export const LOWERBOUND = 1;
 export const HIGHERBOUND = 100;
@@ -54,7 +55,6 @@ sortButton === null || sortButton === void 0 ? void 0 : sortButton.addEventListe
         alert("Please fill all options");
         return;
     }
-    console.log(speed);
     clearAnimation();
     drawArray(generateArray(arraySize));
     let sortingAlgo;
@@ -77,13 +77,10 @@ sortButton === null || sortButton === void 0 ? void 0 : sortButton.addEventListe
             sortingAlgo = new MergeSort(listHtml, helper);
             sortingAlgo.sort();
             break;
-        // case SortingAlgorithm.QuickSort:
-        //     sort.QuickSort([
-        //         ...(document.querySelectorAll(
-        //             ".bar"
-        //         ) as NodeListOf<HTMLElement>),
-        //     ]);
-        //     break;
+        case SortingAlgorithm.QuickSort:
+            sortingAlgo = new QuickSort(listHtml, helper);
+            sortingAlgo.sort();
+            break;
         default:
             break;
     }
