@@ -55,6 +55,7 @@ export default class Helper {
         };
         this.pause = () => __awaiter(this, void 0, void 0, function* () {
             return new Promise((resolve) => {
+                console.log(this.time, 'lol');
                 setTimeout(() => resolve(), this.time);
             });
         });
@@ -71,10 +72,8 @@ export default class Helper {
             yield this.pause();
             arr[i].style.height = arr[j].style.height;
             arr[i].setAttribute("value", arr[j].getAttribute("value") || "");
-            // arr[i] = arr[j];
             arr[j].style.height = temp;
             arr[j].setAttribute("value", `${tempVal}` || "");
-            // arr[j] = temp;
             arr[i].classList.remove("comparing");
             arr[j].classList.remove("comparing");
         });

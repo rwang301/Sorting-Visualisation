@@ -61,6 +61,7 @@ export default class Helper {
 
     pause = async (): Promise<void> => {
         return new Promise((resolve) => {
+            console.log(this.time, 'lol')
             setTimeout(() => resolve(), this.time);
         });
     };

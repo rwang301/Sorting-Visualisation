@@ -1,6 +1,18 @@
-import Sort from "./sort.js";
+import Helper from "./helper.js";
+import BubbleSort from "./sorts/BubbleSort.js";
+import InsertionSort from "./sorts/InsertionSort.js";
+import MergeSort from "./sorts/MergeSort.js";
+import SelectionSort from "./sorts/SelectionSort.js";
 export const LOWERBOUND = 1;
 export const HIGHERBOUND = 100;
+var SortingAlgorithm;
+(function (SortingAlgorithm) {
+    SortingAlgorithm[SortingAlgorithm["BubbleSort"] = 0] = "BubbleSort";
+    SortingAlgorithm[SortingAlgorithm["InsertionSort"] = 1] = "InsertionSort";
+    SortingAlgorithm[SortingAlgorithm["SelectionSort"] = 2] = "SelectionSort";
+    SortingAlgorithm[SortingAlgorithm["MergeSort"] = 3] = "MergeSort";
+    SortingAlgorithm[SortingAlgorithm["QuickSort"] = 4] = "QuickSort";
+})(SortingAlgorithm || (SortingAlgorithm = {}));
 const generateArray = (size) => {
     let randomArray = [];
     for (let i = 0; i < size; i++) {
@@ -45,25 +57,33 @@ sortButton === null || sortButton === void 0 ? void 0 : sortButton.addEventListe
     console.log(speed);
     clearAnimation();
     drawArray(generateArray(arraySize));
-    const sort = new Sort(100 / speed);
+    let sortingAlgo;
+    const listHtml = document.querySelectorAll('.bar');
+    const helper = new Helper(listHtml, 250 / speed);
     switch (sortType) {
-        case 0:
-            sort.BubbleSort();
+        case SortingAlgorithm.BubbleSort:
+            sortingAlgo = new BubbleSort(listHtml, helper);
+            sortingAlgo.sort();
             break;
-        case 1:
-            sort.SelectionSort();
+        case SortingAlgorithm.InsertionSort:
+            sortingAlgo = new InsertionSort(listHtml, helper);
+            sortingAlgo.sort();
             break;
-        case 2:
-            sort.InsertionSort();
+        case SortingAlgorithm.SelectionSort:
+            sortingAlgo = new SelectionSort(listHtml, helper);
+            sortingAlgo.sort();
             break;
-        case 3:
-            sort.MergeSort(0, arraySize - 1);
+        case SortingAlgorithm.MergeSort:
+            sortingAlgo = new MergeSort(listHtml, helper);
+            sortingAlgo.sort();
             break;
-        case 4:
-            sort.QuickSort([
-                ...document.querySelectorAll(".bar"),
-            ]);
-            break;
+        // case SortingAlgorithm.QuickSort:
+        //     sort.QuickSort([
+        //         ...(document.querySelectorAll(
+        //             ".bar"
+        //         ) as NodeListOf<HTMLElement>),
+        //     ]);
+        //     break;
         default:
             break;
     }
