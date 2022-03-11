@@ -8,7 +8,9 @@ export default class InsertionSort extends Sort {
     async sort(): Promise<void> {
         let sortedLen = 1;
         for (let i = 1; i < this.length; i++) {
-            if (this.helper.getValue(i) < this.helper.getValue(sortedLen - 1)) {
+            const currValue = this.helper.getValue(i);
+            const endSortedListValue = this.helper.getValue(sortedLen - 1);
+            if (currValue && endSortedListValue && currValue < endSortedListValue) {
                 for (let j = i; j > 0; j--) {
                     await this.helper.compare(j - 1, j);
                 }

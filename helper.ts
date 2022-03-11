@@ -10,11 +10,15 @@ export default class Helper {
         this.time = time;
     }
     compare = async (i: number, j: number): Promise<void> => {
-        if (this.getValue(i) > this.getValue(j)) {
-            //highlight the two being compared
-            this.list[i].classList.add("comparing");
-            this.list[j].classList.add("comparing");
-            await this.swap(i, j);
+        const valueOne = this.getValue(i);
+        const valueTwo = this.getValue(j);
+        if (valueOne && valueTwo) {
+            if (valueOne > valueTwo) {
+                //highlight the two being compared
+                this.list[i].classList.add("comparing");
+                this.list[j].classList.add("comparing");
+                await this.swap(i, j);
+            }
         }
     };
 
@@ -41,16 +45,20 @@ export default class Helper {
 
     swap = async (i: number, j: number): Promise<void> => {
         await this.pause();
-        let temp = this.getValue(j);
-        this.setValue(j, this.getValue(i));
-        this.setValue(i, temp);
+        const temp = this.getValue(j);
+        const valueOne = this.getValue(i);
+        if (valueOne) this.setValue(j, valueOne);
+        if (temp) this.setValue(i, temp);
         this.list[i].classList.remove("comparing");
         this.list[j].classList.remove("comparing");
     };
 
-    getValue = (index: number, arr?: HTMLElement[]): number => {
-        if (arr) return parseInt(arr[index].getAttribute("value") || "-1");
-        return parseInt(this.list[index].getAttribute("value") || "-1");
+    getValue = (index: number, arr?: HTMLElement[]): number | null => {
+        if (arr) {
+            return (!arr[index].getAttribute("value")) ? null : parseInt(arr[index].getAttribute("value")!);
+        } else {
+            return (!this.list[index].getAttribute("value")) ? null : parseInt(this.list[index].getAttribute("value")!);
+        }
     };
 
     setValue = (index: number, value: number): void => {

@@ -85,14 +85,3 @@ sortButton === null || sortButton === void 0 ? void 0 : sortButton.addEventListe
             break;
     }
 });
-// const arr = generateArray(50);
-// console.log(arr);
-// drawArray(arr);
-// const sort = new Sort(100);
-// // sort.BubbleSort();
-// // sort.InsertionSort();
-// // sort.SelectionSort();
-// // sort.MergeSort(0, 99);
-// sort.QuickSort([
-//     ...(document.querySelectorAll(".bar") as NodeListOf<HTMLElement>),
-// ]);

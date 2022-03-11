@@ -23,13 +23,18 @@ export default class MergeSort extends Sort {
                 return;
             }
             let mid = Math.floor((lo + hi) / 2);
-            yield this.mergeSort(lo, mid);
-            yield this.mergeSort(mid + 1, hi);
-            yield this.mergeList(lo, mid, hi);
-            if (lo == 0 && hi == this.length - 1) {
-                for (let k = 0; k < this.length; k++) {
-                    this.helper.markDone(k);
+            try {
+                yield this.mergeSort(lo, mid);
+                yield this.mergeSort(mid + 1, hi);
+                yield this.mergeList(lo, mid, hi);
+                if (lo == 0 && hi == this.length - 1) {
+                    for (let k = 0; k < this.length; k++) {
+                        this.helper.markDone(k);
+                    }
                 }
+            }
+            catch (error) {
+                console.error(error);
             }
         });
     }
@@ -41,22 +46,28 @@ export default class MergeSort extends Sort {
             const temp = [];
             let i = lo, j = mid + 1;
             while (i <= mid && j <= hi) {
-                if (this.helper.getValue(i) < this.helper.getValue(j)) {
-                    temp.push(this.helper.getValue(i++));
-                }
-                else {
-                    temp.push(this.helper.getValue(j++));
+                const valueOne = this.helper.getValue(i);
+                const valueTwo = this.helper.getValue(j);
+                if (valueOne && valueTwo) {
+                    if (valueOne < valueTwo) {
+                        temp.push(valueOne);
+                        i++;
+                    }
+                    else {
+                        temp.push(valueTwo);
+                        j++;
+                    }
                 }
             }
             if (i <= mid) {
                 temp.push(...[...this.list]
                     .slice(i, mid + 1)
-                    .map((elem) => parseInt(elem.getAttribute("value") || "-1")));
+                    .map((elem) => this.parseElementToInt(elem)));
             }
             if (j <= hi) {
                 temp.push(...[...this.list]
                     .slice(j, hi + 1)
-                    .map((elem) => parseInt(elem.getAttribute("value") || "-1")));
+                    .map((elem) => this.parseElementToInt(elem)));
             }
             // Copy temp array to original array
             for (let k = lo, l = 0; k <= hi; k++, l++) {
@@ -64,5 +75,13 @@ export default class MergeSort extends Sort {
             }
             yield this.helper.removeCompare();
         });
+    }
+    parseElementToInt(elem) {
+        const stringValue = elem.getAttribute("value");
+        const numValue = stringValue ? parseInt(stringValue) : null;
+        if (numValue)
+            return numValue;
+        else
+            throw new Error('Unable to merge');
     }
 }

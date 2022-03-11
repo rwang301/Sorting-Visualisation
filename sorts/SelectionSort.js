@@ -23,7 +23,8 @@ export default class SelectionSort extends Sort {
                 // get min value
                 for (let j = i + 1; j < this.length; j++) {
                     //find smallest element
-                    if (this.helper.getValue(j) < min) {
+                    const value = this.helper.getValue(j);
+                    if (value && min && value < min) {
                         minIndex = j;
                         min = this.helper.getValue(j);
                     }

@@ -23,10 +23,15 @@ export default class QuickSort extends Sort {
                 arr.length == 1 && this.helper.markDone(0, arr);
                 return;
             }
-            let index = yield this.partition(arr);
-            this.helper.markDone(index, arr);
-            yield this.quickSort(arr.slice(0, index));
-            yield this.quickSort(arr.slice(index + 1, arr.length));
+            try {
+                let index = yield this.partition(arr);
+                this.helper.markDone(index, arr);
+                yield this.quickSort(arr.slice(0, index));
+                yield this.quickSort(arr.slice(index + 1, arr.length));
+            }
+            catch (error) {
+                console.error(error);
+            }
             return;
         });
     }
@@ -35,12 +40,27 @@ export default class QuickSort extends Sort {
             //just ensures that every value left of the pivot is smaller
             //and every value to the right is bigger (not necessarily sorted)
             let pivot = this.helper.getValue(0, arr);
+            if (!pivot)
+                throw new Error('Unable to get pivot value');
             let i = 1, j = arr.length - 1;
             while (i < j) {
-                while (this.helper.getValue(i, arr) <= pivot && i != j)
+                let iterator;
+                while (i != j) {
+                    // while (this.helper.getValue(i, arr) <= pivot && i != j) i++;
+                    // while (this.helper.getValue(j, arr) > pivot && i != j) j--;
+                    iterator = this.helper.getValue(i, arr);
+                    if (iterator && iterator > pivot) {
+                        break;
+                    }
                     i++;
-                while (this.helper.getValue(j, arr) > pivot && i != j)
+                }
+                while (i != j) {
+                    iterator = this.helper.getValue(j, arr);
+                    if (iterator && iterator <= pivot) {
+                        break;
+                    }
                     j--;
+                }
                 // swaps and styles
                 if (i >= j)
                     break;
@@ -50,7 +70,10 @@ export default class QuickSort extends Sort {
             // swap the pivot to it's sorted position
             // edge case in quick sort if first element is the largest
             // as i will be length and cause referenceerror in array
-            let sortedPos = pivot > this.helper.getValue(i, arr) ? i : i - 1;
+            const indexStoppedAt = this.helper.getValue(i, arr);
+            if (!indexStoppedAt)
+                throw new Error('Unable to get value');
+            let sortedPos = pivot > indexStoppedAt ? i : i - 1;
             yield this.quickSwap(0, sortedPos, arr);
             return sortedPos;
         });

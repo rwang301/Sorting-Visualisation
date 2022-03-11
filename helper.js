@@ -12,11 +12,15 @@ import { HIGHERBOUND } from "./index.js";
 export default class Helper {
     constructor(list, time) {
         this.compare = (i, j) => __awaiter(this, void 0, void 0, function* () {
-            if (this.getValue(i) > this.getValue(j)) {
-                //highlight the two being compared
-                this.list[i].classList.add("comparing");
-                this.list[j].classList.add("comparing");
-                yield this.swap(i, j);
+            const valueOne = this.getValue(i);
+            const valueTwo = this.getValue(j);
+            if (valueOne && valueTwo) {
+                if (valueOne > valueTwo) {
+                    //highlight the two being compared
+                    this.list[i].classList.add("comparing");
+                    this.list[j].classList.add("comparing");
+                    yield this.swap(i, j);
+                }
             }
         });
         this.compareArray = (lo, mid, hi) => __awaiter(this, void 0, void 0, function* () {
@@ -37,16 +41,22 @@ export default class Helper {
         });
         this.swap = (i, j) => __awaiter(this, void 0, void 0, function* () {
             yield this.pause();
-            let temp = this.getValue(j);
-            this.setValue(j, this.getValue(i));
-            this.setValue(i, temp);
+            const temp = this.getValue(j);
+            const valueOne = this.getValue(i);
+            if (valueOne)
+                this.setValue(j, valueOne);
+            if (temp)
+                this.setValue(i, temp);
             this.list[i].classList.remove("comparing");
             this.list[j].classList.remove("comparing");
         });
         this.getValue = (index, arr) => {
-            if (arr)
-                return parseInt(arr[index].getAttribute("value") || "-1");
-            return parseInt(this.list[index].getAttribute("value") || "-1");
+            if (arr) {
+                return (!arr[index].getAttribute("value")) ? null : parseInt(arr[index].getAttribute("value"));
+            }
+            else {
+                return (!this.list[index].getAttribute("value")) ? null : parseInt(this.list[index].getAttribute("value"));
+            }
         };
         this.setValue = (index, value) => {
             this.list[index].setAttribute("value", `${value}`);
