@@ -1,5 +1,5 @@
-import Helper from "../Helper.js";
-import Sort from "../Sort.js";
+import Helper from "../helper.js";
+import Sort from "../sort.js";
 
 export default class InsertionSort extends Sort {
     constructor(listHtml: NodeListOf<HTMLElement>, helper: Helper) {

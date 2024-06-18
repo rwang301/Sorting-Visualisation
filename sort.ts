@@ -1,4 +1,4 @@
-import Helper from "./Helper.js";
+import Helper from "./helper.js";
 
 export default abstract class Sort {
     length: number;
